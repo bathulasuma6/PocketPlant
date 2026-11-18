@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Auto Backup scope.
+  The exclusions below cover files that Sprint 2 and later will introduce (the local SQLite
+  database and the shared-preferences store). Declaring them up front means the moment Room
+  arrives in Sprint 2 the database is already excluded from Google auto-backup. Supports the
+  Sprint 1 security stance of local-only data.
+-->
+<full-backup-content>
+    <exclude domain="database" path="pocketplant.db" />
+    <exclude domain="database" path="pocketplant.db-journal" />
+    <exclude domain="sharedpref" path="pocketplant_prefs.xml" />
+</full-backup-content>

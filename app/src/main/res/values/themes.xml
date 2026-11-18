@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+      Base application theme. A transparent Material shell so Compose owns every pixel.
+      Sprint 1 keeps this intentionally plain; the plant-green Compose theme is applied
+      inside MainActivity by wrapping the content in PocketPlantTheme.
+    -->
+    <style name="Theme.PocketPlant" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+</resources>
