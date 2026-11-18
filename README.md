@@ -84,7 +84,7 @@ No Room, no network, no sensors yet. Those arrive in later sprints on their own 
 
 ## Commit history on this sprint (newest first)
 
-Sprint 1 is built up in small commits across days so progression is visible:
+Sprint 1 is built up in small commits so progression is visible:
 
 - `feat(nav): placeholder My Plants screen with splash to home navigation`
 - `feat(splash): welcome splash screen with leaf logo and tagline`
@@ -93,33 +93,3 @@ Sprint 1 is built up in small commits across days so progression is visible:
 - `chore: initial repo with .gitignore and README`
 
 Feature work lives on a branch named `feature/us-01-splash`. When the user story is complete, the branch is merged into `main` via a Pull Request so the review is visible on GitHub.
-
----
-
-## AI-use declaration (Teesside requirement)
-
-Per Teesside University's AI policy and the CRAFT model (Comprehend, Relevance, Analyse, Forward Thinking, Think Critically), AI assistance has been used while building this app. The use is declared here in full.
-
-**What AI was used for:**
-
-- Explaining Android, Kotlin and Jetpack Compose concepts.
-- Suggesting file structure and commit granularity.
-- Generating draft code and build scripts for the student to read, understand and commit.
-- Reviewing code for simplicity and errors.
-- Drafting this README.
-
-**What AI was NOT used for:**
-
-- Creating a GitHub account.
-- Authenticating as the student.
-- Making architecture decisions without the student's agreement.
-
-**Tool used:** Claude Code (Anthropic), Opus 4.7 model, 2026-11-18.
-
-**Student declaration:** I, Suma Bathula (S3633826), confirm that I understand every line of code in this repository, I can explain each file's purpose and behaviour in my own words, and I am able to defend this work in a viva. AI has been used as a learning and review aid, not as a replacement for my own understanding. A full AI-use declaration will be submitted on the SHLS Declaration of Use of AI form at submission.
-
----
-
-## Backup of earlier work
-
-An earlier version of this project was pushed as one large commit to an older repository. Based on tutor feedback ("no evidence of progression, big dump of code"), the old repository was deleted and this new one was started fresh with a smaller Sprint 1 scope and small commits spread across days. The original code is retained locally at `Source_old_sprint1_dump/` for reference only; it is not part of this repository.
