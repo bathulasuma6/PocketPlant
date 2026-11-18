@@ -1,24 +1,30 @@
 package uk.ac.tees.mad.s3633826.pocketplant
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import uk.ac.tees.mad.s3633826.pocketplant.data.Plant
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import uk.ac.tees.mad.s3633826.pocketplant.navigation.Destinations
 import uk.ac.tees.mad.s3633826.pocketplant.screens.MyPlantsScreen
 import uk.ac.tees.mad.s3633826.pocketplant.screens.SplashScreen
+import uk.ac.tees.mad.s3633826.pocketplant.viewmodel.MyPlantsViewModel
 
 /**
- * The top-level Compose entry point. Sets up a NavHost with the Sprint 1/2 routes.
+ * The top-level Compose entry point. Sets up the NavHost and wires up the ViewModel.
  *
- * Sprint 2 commit 2: MyPlantsScreen now receives a plants list. For now the list comes
- * from a hardcoded sample so we can see the UI render real rows. The next few commits
- * swap this hardcoded list for Room-backed data loaded through a ViewModel.
+ * Sprint 2 commit 6 (final): the My Plants route now pulls its list from
+ * [MyPlantsViewModel], which in turn loads from Room via [PlantsRepository]. The
+ * hardcoded sample list is gone. If the database is empty, the screen shows the
+ * Sprint 1 empty state; as soon as rows exist, the LazyColumn renders them.
  */
 @Composable
 fun PocketPlantApp() {
     val navController = rememberNavController()
+    val application = LocalContext.current.applicationContext as PocketPlantApplication
 
     NavHost(
         navController = navController,
@@ -34,14 +40,11 @@ fun PocketPlantApp() {
             )
         }
         composable(Destinations.MY_PLANTS) {
-            // Temporary hardcoded sample list; replaced by the ViewModel in commit 6.
-            MyPlantsScreen(plants = SAMPLE_PLANTS)
+            val viewModel: MyPlantsViewModel = viewModel(
+                factory = MyPlantsViewModel.Factory(application.repository),
+            )
+            val plants by viewModel.plants.collectAsStateWithLifecycle()
+            MyPlantsScreen(plants = plants)
         }
     }
 }
-
-private val SAMPLE_PLANTS = listOf(
-    Plant(id = 1, commonName = "Monstera", nickname = "Monstie", addedAt = 0L),
-    Plant(id = 2, commonName = "Snake plant", nickname = "Sneaky", addedAt = 0L),
-    Plant(id = 3, commonName = "Pothos", nickname = "Pothy", addedAt = 0L),
-)
