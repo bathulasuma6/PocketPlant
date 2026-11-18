@@ -7,8 +7,19 @@
     <string name="splash_welcome_title">Welcome to PocketPlant</string>
     <string name="splash_logo_cd">PocketPlant leaf logo</string>
 
-    <!-- My Plants screen (Sprint 1 placeholder; the real list arrives in Sprint 2) -->
+    <!-- My Plants screen -->
     <string name="my_plants_title">My Plants</string>
     <string name="my_plants_empty_title">No plants yet</string>
-    <string name="my_plants_empty_subtitle">Adding plants will be enabled in Sprint 2.</string>
+    <string name="my_plants_empty_subtitle">Tap the + button to add your first plant.</string>
+    <string name="my_plants_add_cd">Add a plant</string>
+
+    <!-- Add Plant screen -->
+    <string name="add_plant_title">Add a plant</string>
+    <string name="add_plant_back_cd">Back to My Plants</string>
+    <string name="add_plant_common_name_label">Common name</string>
+    <string name="add_plant_common_name_placeholder">e.g. Monstera, Snake plant</string>
+    <string name="add_plant_nickname_label">Your nickname for it</string>
+    <string name="add_plant_nickname_placeholder">e.g. Monstie</string>
+    <string name="add_plant_save">Save plant</string>
+    <string name="add_plant_hint">Both fields are required.</string>
 </resources>

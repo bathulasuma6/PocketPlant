@@ -20,6 +20,21 @@ class PlantsRepository(private val dao: PlantDao) {
      */
     fun observeAll(): Flow<List<Plant>> =
         dao.observeAll().map { rows -> rows.map(PlantEntity::toDomain) }
+
+    /**
+     * Saves a new plant typed in by the user. Trims whitespace and rejects blanks.
+     * Returns the auto-generated row id so the caller (Sprint 2 US-06 Undo) can restore
+     * the row at the same id later.
+     */
+    suspend fun addByHand(commonName: String, nickname: String, now: Long): Long {
+        val cleanCommon = commonName.trim()
+        val cleanNickname = nickname.trim()
+        require(cleanCommon.isNotEmpty()) { "commonName must not be blank" }
+        require(cleanNickname.isNotEmpty()) { "nickname must not be blank" }
+        return dao.insert(
+            PlantEntity(commonName = cleanCommon, nickname = cleanNickname, addedAt = now),
+        )
+    }
 }
 
 private fun PlantEntity.toDomain(): Plant =
