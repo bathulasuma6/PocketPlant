@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PocketPlant</string>
+    <string name="app_tagline">Your pocket plant companion</string>
+
+    <!-- Splash screen -->
+    <string name="splash_welcome_title">Welcome to PocketPlant</string>
+    <string name="splash_logo_cd">PocketPlant leaf logo</string>
 </resources>
