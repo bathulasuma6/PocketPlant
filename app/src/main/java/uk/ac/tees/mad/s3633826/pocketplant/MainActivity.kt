@@ -13,13 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import uk.ac.tees.mad.s3633826.pocketplant.ui.theme.PocketPlantTheme
 
 /**
  * The single Activity hosting the whole Compose UI.
  *
- * Sprint 1, commit 2: an empty Android skeleton. The app launches, uses the default
- * Material 3 theme, and shows the app name centred on the screen. The plant-green theme,
- * splash screen and navigation are added in later commits of Sprint 1.
+ * Sprint 1, commit 3: content is now wrapped in PocketPlantTheme, so colours come from
+ * the plant-green Material 3 scheme (light and dark). The splash screen and navigation
+ * are added in later commits of this feature branch.
  */
 class MainActivity : ComponentActivity() {
 
@@ -28,8 +29,11 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            MaterialTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
+            PocketPlantTheme {
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background,
+                ) {
                     AppNamePlaceholder()
                 }
             }
@@ -37,10 +41,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-/**
- * Temporary placeholder: shows just the app name while the real screens are built up
- * across the remaining Sprint 1 commits.
- */
 @Composable
 private fun AppNamePlaceholder() {
     Box(
@@ -50,6 +50,7 @@ private fun AppNamePlaceholder() {
         Text(
             text = stringResource(R.string.app_name),
             style = MaterialTheme.typography.headlineLarge,
+            color = MaterialTheme.colorScheme.primary,
         )
     }
 }
