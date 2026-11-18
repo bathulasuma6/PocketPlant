@@ -35,6 +35,31 @@ class PlantsRepository(private val dao: PlantDao) {
             PlantEntity(commonName = cleanCommon, nickname = cleanNickname, addedAt = now),
         )
     }
+
+    /**
+     * Deletes the plant with the given id and returns the full domain model so the
+     * caller can show an Undo Snackbar. Returns null if the id no longer exists
+     * (defensive; swipe can race with another delete).
+     */
+    suspend fun deleteAndReturn(id: Long): Plant? {
+        val row = dao.findById(id) ?: return null
+        dao.delete(row)
+        return row.toDomain()
+    }
+
+    /**
+     * Re-inserts a previously deleted plant. The id is preserved by REPLACE semantics
+     * so the row returns to the exact same position in the sort order.
+     */
+    suspend fun restore(plant: Plant): Long =
+        dao.insert(
+            PlantEntity(
+                id = plant.id,
+                commonName = plant.commonName,
+                nickname = plant.nickname,
+                addedAt = plant.addedAt,
+            ),
+        )
 }
 
 private fun PlantEntity.toDomain(): Plant =

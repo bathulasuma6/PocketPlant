@@ -12,6 +12,9 @@
     <string name="my_plants_empty_title">No plants yet</string>
     <string name="my_plants_empty_subtitle">Tap the + button to add your first plant.</string>
     <string name="my_plants_add_cd">Add a plant</string>
+    <string name="my_plants_deleted_snackbar">%1$s removed</string>
+    <string name="my_plants_deleted_undo">Undo</string>
+    <string name="my_plants_row_delete_cd">Swipe left to delete %1$s</string>
 
     <!-- Add Plant screen -->
     <string name="add_plant_title">Add a plant</string>
