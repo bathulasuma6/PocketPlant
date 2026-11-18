@@ -18,12 +18,10 @@ import uk.ac.tees.mad.s3633826.pocketplant.viewmodel.MyPlantsViewModel
 /**
  * The top-level Compose entry point. Sets up the NavHost and wires up the ViewModels.
  *
- * Sprint 2 routes:
- *  - splash (US-01): 1.5-second welcome, then navigates to my_plants and pops itself.
- *  - my_plants (US-04): shows the list, FAB opens add_plant.
- *  - add_plant (US-05): form; Back arrow or successful Save returns to my_plants.
- *
- * Sprint 2 US-06 adds swipe-to-delete on my_plants. Sprint 3 adds plant_detail.
+ * Sprint 2 complete routes:
+ *  - splash (US-01)
+ *  - my_plants (US-04 list, US-05 add FAB, US-06 swipe-delete with Undo)
+ *  - add_plant (US-05)
  */
 @Composable
 fun PocketPlantApp() {
@@ -48,9 +46,14 @@ fun PocketPlantApp() {
                 factory = MyPlantsViewModel.Factory(application.repository),
             )
             val plants by viewModel.plants.collectAsStateWithLifecycle()
+            val deleteEvent by viewModel.deleteEvent.collectAsStateWithLifecycle()
             MyPlantsScreen(
                 plants = plants,
+                deleteEvent = deleteEvent,
                 onAddClick = { navController.navigate(Destinations.ADD_PLANT) },
+                onDelete = viewModel::onDelete,
+                onUndoDelete = viewModel::onUndoDelete,
+                acknowledgeDelete = viewModel::acknowledgeDelete,
             )
         }
         composable(Destinations.ADD_PLANT) {
