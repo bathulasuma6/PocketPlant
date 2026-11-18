@@ -9,17 +9,21 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import uk.ac.tees.mad.s3633826.pocketplant.navigation.Destinations
+import uk.ac.tees.mad.s3633826.pocketplant.screens.AddPlantScreen
 import uk.ac.tees.mad.s3633826.pocketplant.screens.MyPlantsScreen
 import uk.ac.tees.mad.s3633826.pocketplant.screens.SplashScreen
+import uk.ac.tees.mad.s3633826.pocketplant.viewmodel.AddPlantViewModel
 import uk.ac.tees.mad.s3633826.pocketplant.viewmodel.MyPlantsViewModel
 
 /**
- * The top-level Compose entry point. Sets up the NavHost and wires up the ViewModel.
+ * The top-level Compose entry point. Sets up the NavHost and wires up the ViewModels.
  *
- * Sprint 2 commit 6 (final): the My Plants route now pulls its list from
- * [MyPlantsViewModel], which in turn loads from Room via [PlantsRepository]. The
- * hardcoded sample list is gone. If the database is empty, the screen shows the
- * Sprint 1 empty state; as soon as rows exist, the LazyColumn renders them.
+ * Sprint 2 routes:
+ *  - splash (US-01): 1.5-second welcome, then navigates to my_plants and pops itself.
+ *  - my_plants (US-04): shows the list, FAB opens add_plant.
+ *  - add_plant (US-05): form; Back arrow or successful Save returns to my_plants.
+ *
+ * Sprint 2 US-06 adds swipe-to-delete on my_plants. Sprint 3 adds plant_detail.
  */
 @Composable
 fun PocketPlantApp() {
@@ -44,7 +48,20 @@ fun PocketPlantApp() {
                 factory = MyPlantsViewModel.Factory(application.repository),
             )
             val plants by viewModel.plants.collectAsStateWithLifecycle()
-            MyPlantsScreen(plants = plants)
+            MyPlantsScreen(
+                plants = plants,
+                onAddClick = { navController.navigate(Destinations.ADD_PLANT) },
+            )
+        }
+        composable(Destinations.ADD_PLANT) {
+            val viewModel: AddPlantViewModel = viewModel(
+                factory = AddPlantViewModel.Factory(application.repository),
+            )
+            AddPlantScreen(
+                viewModel = viewModel,
+                onBack = { navController.popBackStack() },
+                onSaved = { navController.popBackStack() },
+            )
         }
     }
 }

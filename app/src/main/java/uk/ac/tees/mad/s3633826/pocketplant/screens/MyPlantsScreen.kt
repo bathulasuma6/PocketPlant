@@ -2,12 +2,18 @@ package uk.ac.tees.mad.s3633826.pocketplant.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,19 +29,31 @@ import uk.ac.tees.mad.s3633826.pocketplant.R
 import uk.ac.tees.mad.s3633826.pocketplant.data.Plant
 
 /**
- * Sprint 2 US-04: shows the saved plants as a scrolling list. If the list is empty, the
- * Sprint 1 empty-state message is shown instead. The screen itself is "dumb": it just
- * receives a [plants] list and renders it. Where that list comes from (hardcoded, Room,
- * ViewModel) is decided by the caller in later commits of this feature branch.
+ * Sprint 2 home screen.
+ *
+ * Shows the saved plants as a scrolling list (US-04), or the empty state when none are
+ * saved. The FloatingActionButton (US-05) opens the Add Plant screen. Swipe-to-delete
+ * with Undo arrives in US-06.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyPlantsScreen(plants: List<Plant>) {
+fun MyPlantsScreen(
+    plants: List<Plant>,
+    onAddClick: () -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(text = stringResource(R.string.my_plants_title)) },
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = onAddClick) {
+                Icon(
+                    imageVector = Icons.Filled.Add,
+                    contentDescription = stringResource(R.string.my_plants_add_cd),
+                )
+            }
         },
     ) { innerPadding ->
         if (plants.isEmpty()) {
@@ -50,7 +68,7 @@ fun MyPlantsScreen(plants: List<Plant>) {
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding),
-                contentPadding = androidx.compose.foundation.layout.PaddingValues(16.dp),
+                contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 items(items = plants, key = { it.id }) { plant ->
@@ -86,7 +104,7 @@ private fun EmptyState(modifier: Modifier = Modifier) {
 @Composable
 private fun PlantRow(plant: Plant) {
     Card(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxWidth(),
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
