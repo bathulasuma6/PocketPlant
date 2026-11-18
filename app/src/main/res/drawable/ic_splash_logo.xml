@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stylised leaf used on the splash screen. Drawn in a 108x108 safe area so it can also be
+  reused as an Android 12+ SplashScreen API icon in a later sprint.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path
+        android:fillColor="@color/splash_icon_tint"
+        android:pathData="M54,20
+            C 36,32 32,54 36,74
+            C 56,78 76,66 82,46
+            C 84,40 82,34 78,30
+            C 70,22 60,20 54,20 Z" />
+    <path
+        android:strokeColor="#FAF7F2"
+        android:strokeWidth="1.5"
+        android:pathData="M54,74
+            C 54,60 60,46 72,34" />
+</vector>

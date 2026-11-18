@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PocketPlant</string>
+    <string name="app_tagline">Your pocket plant companion</string>
+
+    <!-- Splash screen -->
+    <string name="splash_welcome_title">Welcome to PocketPlant</string>
+    <string name="splash_logo_cd">PocketPlant leaf logo</string>
+
+    <!-- My Plants screen (Sprint 1 placeholder; the real list arrives in Sprint 2) -->
+    <string name="my_plants_title">My Plants</string>
+    <string name="my_plants_empty_title">No plants yet</string>
+    <string name="my_plants_empty_subtitle">Adding plants will be enabled in Sprint 2.</string>
 </resources>
